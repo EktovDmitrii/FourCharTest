@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/text_input_color" />
+    <stroke
+        android:width="2dp"
+        android:color="@color/green_blue" />
+    <corners android:radius="20dip" />
+    <padding
+        android:bottom="0dip"
+        android:left="12dip"
+        android:right="12dip"
+        android:top="0dip" />
+</shape>

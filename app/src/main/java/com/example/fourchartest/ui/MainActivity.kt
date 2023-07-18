@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        launchRightFragment(HomeFragment.newInstance())
+        launchRightFragment(EnteranceFragment.newInstance())
     }
 
     private fun launchRightFragment(fragment: Fragment) {

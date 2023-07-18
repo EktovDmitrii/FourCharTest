@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="DeepIndigo">#1A237E</color>
     <color name="shadowGrey">#44AAAAAA</color>
+    <color name="text_input_color">#88DEDCDC</color>
+    <color name ="green_blue">#2C4A52</color>
+    <color name ="fairway">#537072</color>
 </resources>
