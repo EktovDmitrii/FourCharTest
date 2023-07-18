@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val LAST_TIME_IN_APP = "lastTimeInApp"
-        private const val MINUTE_IN_MILLIS = 10 * 1000
+        private const val MINUTE_IN_MILLIS = 60 * 1000
 
     }
 
