@@ -1,5 +1,9 @@
 package com.example.fourchartest.domain.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class MovieDetailInfo(
     var id: Int,
     var posterPath: String?,
@@ -10,4 +14,4 @@ data class MovieDetailInfo(
     val overview: String,
     val backdropPath: String?,
     val genreIds: List<Int>?,
-)
+) : Parcelable

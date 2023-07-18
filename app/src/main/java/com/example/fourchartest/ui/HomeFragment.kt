@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.example.fourchartest.R
 import com.example.fourchartest.databinding.FragmentHomeBinding
 import com.example.fourchartest.domain.model.MovieInfo
 import com.example.fourchartest.domain.subscribe
 import com.example.fourchartest.ui.recycler.HorizontalMovieInfoAdapter
 import com.example.fourchartest.ui.recycler.VerticalMovieInfoAdapter
+import com.example.fourchartest.ui.viewModels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,7 +38,7 @@ class HomeFragment : Fragment() {
         adapterVertical =
             VerticalMovieInfoAdapter(object : HorizontalMovieInfoAdapter.OnMovieClickListener {
                 override fun onMovieClick(movieInfo: MovieInfo) {
-//                    launchDetailFragment(movieInfo.id)
+                    launchDetailFragment(movieInfo.id)
                 }
             })
         binding.rvFilmInfoList.adapter = adapterVertical
@@ -67,12 +66,12 @@ class HomeFragment : Fragment() {
         }
     }
 
-//    private fun launchDetailFragment(movieId: Int) {
-//        requireActivity().supportFragmentManager.beginTransaction()
-//            .replace(R.id.home_fragment_container, MovieDetailFragment.newInstance(movieId))
-//            .addToBackStack("detail")
-//            .commit()
-//    }
+    private fun launchDetailFragment(movieId: Int) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.home_fragment_container, MovieDetailFragment.newInstance(movieId))
+            .addToBackStack("detail")
+            .commit()
+    }
 
     companion object {
 

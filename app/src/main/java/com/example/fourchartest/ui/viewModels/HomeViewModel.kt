@@ -1,4 +1,4 @@
-package com.example.fourchartest.ui
+package com.example.fourchartest.ui.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
