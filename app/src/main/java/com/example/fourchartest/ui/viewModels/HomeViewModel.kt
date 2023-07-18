@@ -1,5 +1,6 @@
 package com.example.fourchartest.ui.viewModels
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,13 +27,22 @@ class HomeViewModel @Inject constructor(
     val listMovie: LiveData<List<MovieList>>
         get() = _listMovie
 
+    private val _exceptionLD = MutableLiveData<String>()
+    val exceptionLD: LiveData<String>
+        get() = _exceptionLD
+
     fun getAllMovieList() {
         _isLoadingLifeData.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            val lists = getAllMovieInfoUseCase()
+            var list = listOf<MovieList>()
+            try {
+                  list = getAllMovieInfoUseCase()
+            } catch (e: Exception) {
+                _exceptionLD.postValue(e.toString())
+            }
             withContext((Dispatchers.Main)) {
                 _isLoadingLifeData.value = false
-                _listMovie.value = lists
+                _listMovie.value = list
             }
         }
     }
