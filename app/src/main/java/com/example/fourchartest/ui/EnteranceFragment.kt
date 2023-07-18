@@ -1,11 +1,13 @@
 package com.example.fourchartest.ui
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.example.fourchartest.R
 import com.example.fourchartest.databinding.FragmentEnteranceBinding
@@ -44,7 +46,7 @@ class EnteranceFragment : Fragment() {
 
     private fun setBinds() {
         pref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        blockEndTime = pref?.getLong("blockEndTime", 0L) ?: throw RuntimeException("Wrong time")
+        blockEndTime = pref?.getLong(BLOCK_END_TIME, 0L) ?: throw RuntimeException("Wrong time")
         if (System.currentTimeMillis() < blockEndTime) {
             showTimer()
             binding.tvResult.visibility = View.VISIBLE
@@ -61,8 +63,9 @@ class EnteranceFragment : Fragment() {
             wrongAttempts = 0
             blockEndTime = 0L
             val editor = pref?.edit()
-            editor?.putLong("blockEndTime", blockEndTime)
+            editor?.putLong(BLOCK_END_TIME, blockEndTime)
             editor?.apply()
+            hideKeyboard(requireContext(), view)
             launchHomeFragment()
         } else {
             wrongAttempts++
@@ -73,7 +76,7 @@ class EnteranceFragment : Fragment() {
             if (wrongAttempts >= maxAttempts) {
                 blockEndTime = System.currentTimeMillis() + blockDuration
                 val editor = pref?.edit()
-                editor?.putLong("blockEndTime", blockEndTime)
+                editor?.putLong(BLOCK_END_TIME, blockEndTime)
                 editor?.apply()
                 showTimer()
                 binding.tvResult.visibility = View.VISIBLE
@@ -114,8 +117,15 @@ class EnteranceFragment : Fragment() {
         return String.format("%02d:%02d", minutes, seconds)
     }
 
+    private fun hideKeyboard(context: Context, view: View?) {
+        val imm =
+            context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
     companion object {
 
+        private const val BLOCK_END_TIME = "blockEndTime"
         fun newInstance() =
             EnteranceFragment()
     }
